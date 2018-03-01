@@ -8,28 +8,9 @@ import json
 
 
 
-# lidar = RPLidar('/dev/ttyUSB0')
+lidar = RPLidar('/dev/ttyUSB0')
 
-def get_distance(flat1,flon1):
-    global finalDestination
-    x2lon=finalDestination[1]
-    x2lat=finalDestination[0]
-    print('get distance from current coordinate')
-    diflat = math.radians(x2lat - flat1) #notice it must be done in radians
-    flat1 = math.radians(flat1) #convert current latitude to radians
-    x2lat = math.radians(x2lat) #convert waypoint latitude to radians
-    diflon = math.radians((x2lon) - (flon1))  #subtract and convert longitudes to radians
-    dist_calc = (math.sin(diflat / 2.0) * math.
-                 sin(diflat / 2.0))
-    dist_calc2 = math.cos(flat1)
-    dist_calc2 *= math.cos(x2lat)
-    dist_calc2 *= math.sin(diflon / 2.0)
-    dist_calc2 *= math.sin(diflon / 2.0)
-    dist_calc += dist_calc2
-    dist_calc = (2 * math.atan2(math.sqrt(dist_calc), math.sqrt(1.0 - dist_calc)))
-    dist_calc *= 6371000.0 #Converting to meters
 
-    return dist_calc
 def findPatch(dataList,number):
     patchList = []
     skip = 0
